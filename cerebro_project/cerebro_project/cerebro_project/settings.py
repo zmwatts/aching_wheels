@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h4e20_j%cx!7+mm10u*7*_(*1)$c4imbnbv!^98-(x^nior(p7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'missing_persons',
     'rest_framework', 
     'apis',
+    "corsheaders",
     
 ]
 REST_FRAMEWORK = {
@@ -57,8 +58,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_COOKIE_NAME = "csrftoken"
 ROOT_URLCONF = 'cerebro_project.urls'
 
 TEMPLATES = [
