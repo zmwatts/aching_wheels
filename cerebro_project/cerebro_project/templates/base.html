@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Materialize -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    </head>
+    <body>
+        <div class="container teal white-text">
+            <h1 class="center-align">{{ message }}</h1>
+            {% comment %} {% include 'partials/navbar.html' %} {% endcomment %}
+
+            {% block content %}
+            {% endblock %}
+            
+            {% if user.is_authenticated %}
+                <nav class="nav-wrapper indigo">
+                    <div class="container">
+                        <a href="#" class="href"></a>
+                        <a href="#" class="brand-logo">Chirp</a>
+                        <a href="#" class="sidenav-trigger" data-target="mobile-links">
+                            <i class="material-icons">menu</i>
+                        </a>
+                            <ul class="right hide-on-med-and-down">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Login</a></li>
+                            </ul>
+                    </div>
+                </nav>
+                <ul class="sidenav" id="mobile-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="{% url 'accounts:user_logout' %}">Logout</a></li>
+                </ul>
+                <script>
+                    $(document).ready(function(){
+                        $('.sidenav').sidenav();
+                        $('.right-hide-on-med-and-down').hide();
+                    })
+                    alert('HELLO'))
+                </script>
+            {% endif %}
+        </div>
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>
