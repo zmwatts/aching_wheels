@@ -13,7 +13,7 @@ def user_register(request):
         new_user.set_password(request.POST['password'])
         new_user.save()
         login(request, new_user)
-        return redirect('blogapp:profile', pk=new_user.id)
+        return redirect('missing_persons:home')
         #return redirect('accounts:login')
        # return render(request, 'accounts/login.html')
     return render(request, 'accounts/register.html')
@@ -29,7 +29,7 @@ def user_login(request):
             login(request, user)
             print(user.id)
             print(user.username)
-            return redirect('blogapp:profile', pk=user.id)
+            return redirect('missing_persons:home')
     return render(request, 'accounts/login.html')
 
 def user_logout(request):
