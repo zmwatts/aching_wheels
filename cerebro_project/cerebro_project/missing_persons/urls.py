@@ -7,5 +7,5 @@ app_name = 'missing_persons'
 urlpatterns = [
     path('home/', views.home, name='home'),
     #path('search_results/', SearchResults.as_view())
-    path('search_results/', views.SearchResults)
+    #path('search_results/', views.SearchResults)
     ]

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% load static %}
 <html>
     <head>
         <meta charset="utf-8">
@@ -34,13 +34,12 @@
                     <li><a href="#">Profile</a></li>
                     <li><a href="{% url 'accounts:user_logout' %}">Logout</a></li>
                 </ul>
-                <script>
+                {% comment %} <script>
                     $(document).ready(function(){
                         $('.sidenav').sidenav();
                         $('.right-hide-on-med-and-down').hide();
                     })
-                    alert('HELLO'))
-                </script>
+                </script> {% endcomment %}
             {% endif %}
         <div class="container teal white-text">
             <h1 class="center-align">{{ message }}</h1>
@@ -48,11 +47,17 @@
 
             {% block content %}
             {% endblock %}
-            
+            [[ app.message ]]            
 
         </div> 
 
+        {% comment %} Axios CDN {% endcomment %}
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        {% comment %} Vue CDN {% endcomment %}
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        {% comment %} vue search.js files  {% endcomment %}
+        <script  src="{% static 'home.js' %}"></script>
     </body>
 </html>

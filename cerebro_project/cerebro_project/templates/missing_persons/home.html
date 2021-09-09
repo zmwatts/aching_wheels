@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %} Home {% endblock %}
 
 {% block content %} 
 {% csrf_token %}
-    <div id="#app" class="center-align">
+    <div id="app1" class="center-align">
+    [[ message ]]
         <br>
         <br>
         <br>
@@ -14,11 +15,13 @@
                 <input  type="text" id ="search_criteria" class="center-align white" placeholder="Who are you looking for?">
                 <input type="submit" value="submit" class="center-align">
             </form>
+            
         <br>
         <br>
         <br>
         <br>
         <br>
     </div>
+ 
 {% endblock %}
 
