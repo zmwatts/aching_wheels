@@ -46,18 +46,13 @@
             {% comment %} {% include 'partials/navbar.html' %} {% endcomment %}
 
             {% block content %}
-            {% endblock %}
-            [[ app.message ]]            
+            {% endblock %}       
 
         </div> 
 
-        {% comment %} Axios CDN {% endcomment %}
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         {% comment %} Vue CDN {% endcomment %}
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        {% comment %} vue search.js files  {% endcomment %}
-        <script  src="{% static 'home.js' %}"></script>
     </body>
 </html>

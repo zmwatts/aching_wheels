@@ -6,6 +6,7 @@ from .views import SearchResults
 app_name = 'missing_persons'
 urlpatterns = [
     path('home/', views.home, name='home'),
+    path('bulletin/<int:pk>', views.index, name='index')
     #path('search_results/', SearchResults.as_view())
     #path('search_results/', views.SearchResults)
     ]

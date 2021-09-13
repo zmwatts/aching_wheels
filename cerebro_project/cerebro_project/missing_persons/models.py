@@ -15,10 +15,14 @@ class Race(models.Model):
         return self.race
 
 class Missing_person(models.Model):
+    #id = models.AutoField(blank=False)
     First_Name = models.CharField(blank=False, max_length=200)
     Last_Name = models.CharField(blank=False, max_length=200)
     eyecolor = models.ForeignKey(Eyecolor,on_delete=models.CASCADE, blank=True, null=True)
     haircolor = models.CharField(max_length=200,blank=False)
+    age = models.CharField(max_length=200,blank=False)
+    sex = models.CharField(blank=True, max_length=50)
+    date_last_contact = models.DateField(blank=False)
     height_ft = models.SmallIntegerField(blank=False)
     height_in = models.SmallIntegerField(blank=False)
     weight = models.IntegerField(blank=False)

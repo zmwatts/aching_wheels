@@ -9,6 +9,15 @@ class Missing_personViewSet(viewsets.ModelViewSet):
     queryset = models.Missing_person.objects.all()
     serializer_class = Missing_personSerializer
 
+class ListMissing_person(generics.ListCreateAPIView):
+    queryset = models.Missing_person.objects.all()
+    serializer_class = Missing_personSerializer
+
+
+class DetailMissing_person(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Missing_person.objects.all()
+    serializer_class = Missing_personSerializer
+
 class SearchResults(generics.ListAPIView):
     queryset = models.Missing_person.objects.all()
     serializer_class = Missing_personSerializer

@@ -4,6 +4,7 @@
 {% block title %} Search Results {% endblock %}
 
 {% block content %} 
+{% csrf_token %}
 <div class='container'> 
     <h3>Your search yielded {{counter}} results </h3>
     {% let counter = 0%}

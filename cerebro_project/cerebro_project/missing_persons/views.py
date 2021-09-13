@@ -8,6 +8,10 @@ from rest_framework import filters, generics
 @login_required
 def home(request):
     return render(request, 'missing_persons/home.html')
+    
+@login_required
+def index(request, pk):
+    return render(request, 'missing_persons/index.html', {pk:pk})
 
 @login_required
 class SearchResults(generics.ListAPIView):

@@ -1,20 +1,52 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <!-- Materialize -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    </head>
-    <body>
-        
-        
-        {% comment %} Materialize Javascript {% endcomment %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    </body>
-</html>
+{%extends 'base.html'%}
+{% load static %}
+{%block content%}
+    <div id="app" class="container">
+        <div class="center-align">
+            <img style="width: 30em;" :src="person.photo">
+        </div>
+        <h1 class="center-align">[[person.First_Name]] [[person.Last_Name]]</h1>
+
+        <div>
+            <div class="column cyan accent-1 black-text">
+                <ul>
+                    <li>Age:  [[person.Age]]</li>
+                    <li>Date Last Contact: [[person.date_last_contact]]</li>
+                    <li>Eye Color: [[person.eyecolor.color]]</li>
+                    <li>Hair Color:  [[person.haircolor]]</li>
+                    <li>Height:  [[person.height_ft]] feet [[person.height_in]] inches</li>
+                    <li>Weight:  [[person.weight]]</li>
+                    <li>Race:  [[person.race.race]]</li>
+                    <li>Unique Markings: [[person.unique_markings]]</li>
+                    <li>Sex:  [[person.sex]]</li>
+                </ul>
+            </div>
+        </div>
+        <div class="white black-text">
+            <h5 class="center-align">Description of Disappearance</h3>
+            [[person.description_of_disappearance]]
+        </div>
+        <br>
+        <div id='mapsdiv'></div>
+        <br>
+        <div class="container">
+            <iframe
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                src="source">
+            </iframe>
+        </div>
+    </div>
+
+
+    {% comment %} Axios CDN {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    {% comment %} Vue CDN {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% comment %} vue index.js files  {% endcomment %}
+    <script  src="{% static 'secrets.js' %}"></script>
+    <script  src="{% static 'index.js' %}"></script>
+{%endblock%}
