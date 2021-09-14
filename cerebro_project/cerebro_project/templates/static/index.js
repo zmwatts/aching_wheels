@@ -5,9 +5,13 @@ let app = new Vue({
     el: '#app',
     delimiters: ["[[","]]"],
     data: {
+        mapdiv: "",
         message: 'Hello!',
         id: 0,
         person: {},
+        newCommentText: "",
+        newCommentusername: "",
+        comments: [],
     },
     mounted: 
        function (){
@@ -17,22 +21,28 @@ let app = new Vue({
         .then((response) => {
             console.log(response.data)
             app.person = response.data
+            console.log("anystring")
         })
-        this.source=`https://www.google.com/maps/embed/v1/place?key=${token}&q=Space+Needle,Seattle+WA`
-        let maps = document.getElementById("mapsdiv")
-        maps.innerHTML =  `<iframe
-        width="450"
-        height="250"
-        frameborder="0" style="border:0"
-        src="https://www.google.com/maps/embed/v1/MAP_MODE?key=${token}&PARAMETERS" allowfullscreen>
-      </iframe>`
-      `https://www.google.com/maps/embed/v1/streetview
-  ?key=${token}
-  &location=${response.data.last_seen_latitude},${response.data.last_seen_longitude}
-  &heading=210
-  &pitch=10
-  &fov=35`
-
-},
+        .then(()=>{
+        let maps = document.getElementById("viewdiv")
+            app.mapdiv =  `<iframe
+            width="700em"
+            height="600em"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/view?key=${token}&center=${app.person.last_seen_latitude},${app.person.last_seen_longitude}&zoom=18&maptype=satellite" 
+            allowfullscreen>
+            </iframe>`
+        }),
+    },
+    methods:
+        addNewComment: function () {
+            this.comments.push({
+                id: this.nextCommentId++,
+                username: this.newCommentusername,
+                comment: this.newCommentText
+            })
+            this.newCommentText = "",
+            this.newCommentusername = "",
+        }
 
 })

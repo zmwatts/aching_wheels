@@ -4,7 +4,7 @@ from django.db.models.query import QuerySet
 from missing_persons.models import Missing_person
 from rest_framework import serializers
 from missing_persons import models
-from missing_persons.models import Race
+from missing_persons.models import Race, Comment
 
 class RaceSerializer(serializers.ModelSerializer):
     
@@ -15,10 +15,20 @@ class RaceSerializer(serializers.ModelSerializer):
             'race'
         )    
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Comment
+        fields=(
+            'username',
+            'content',
+            'missing_person',
+        )
+
 class Missing_personSerializer(serializers.ModelSerializer):
     #race = serializers.SlugRelatedField(queryset=Race.objects.all,slug_field="id")
     # race = Race.objects.get(race=Missing_person.race)
     race = RaceSerializer()
+    comment = CommentSerializer
     class Meta:
         fields = (
             'id',

@@ -1,6 +1,7 @@
 # missing_personss/models.py
 from django.db import models
 from django.db.models.enums import TextChoices
+from django.contrib.auth.models import User
 
 class Eyecolor(models.Model):
     colors = (("GREEN", "GREEN"), ("BLUE", "BLUE"),("BLACK", "BLACK"), ("BROWN", "BROWN"), ("HAZEL", "HAZEL"), ("OTHER", "OTHER" ))
@@ -15,11 +16,10 @@ class Race(models.Model):
         return self.race
 
 class Missing_person(models.Model):
-    #id = models.AutoField(blank=False)
     First_Name = models.CharField(blank=False, max_length=200)
     Last_Name = models.CharField(blank=False, max_length=200)
     eyecolor = models.ForeignKey(Eyecolor,on_delete=models.CASCADE, blank=True, null=True)
-    haircolor = models.CharField(max_length=200,blank=False)
+    haircolor = (models.CharField(max_length=200,blank=False))
     age = models.CharField(max_length=200,blank=False)
     sex = models.CharField(blank=True, max_length=50)
     date_last_contact = models.DateField(blank=False)
@@ -32,7 +32,12 @@ class Missing_person(models.Model):
     last_seen_longitude = models.FloatField(blank=False)
     unique_markings = models.CharField(null=True,max_length=300)
     photo = models.ImageField(upload_to='cars')
-   
-
     def __str__(self):
         return (f'{self.First_Name} {self.Last_Name}')
+
+class Comment(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    content = models.CharField(blank=False, max_length=200)
+    missing_person = models.ForeignKey(Missing_person,on_delete=models.CASCADE, blank=True, null=True)
+    def __str__(self):
+        return self.username, self.id

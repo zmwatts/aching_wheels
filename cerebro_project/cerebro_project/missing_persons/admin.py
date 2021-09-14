@@ -1,6 +1,6 @@
 # missing_persons/admin.py
 from django.contrib import admin
-from .models import Missing_person, Eyecolor, Race
+from .models import Missing_person, Eyecolor, Race, Comment
 from django.forms import TextInput, Textarea
 from django.db import models
 
@@ -12,3 +12,4 @@ class YourModelAdmin(admin.ModelAdmin):
 admin.site.register(Missing_person, YourModelAdmin)
 admin.site.register(Eyecolor)
 admin.site.register(Race)
+admin.site.register(Comment)

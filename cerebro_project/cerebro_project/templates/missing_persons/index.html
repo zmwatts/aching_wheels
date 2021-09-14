@@ -27,15 +27,16 @@
             [[person.description_of_disappearance]]
         </div>
         <br>
-        <div id='mapsdiv'></div>
+        <div class="center-align" id="mapsdiv" v-html="mapdiv"></div>
         <br>
+        <div class="container" v-for:comment in comments>
+            <div class="container">[[comment]]</div>
+        </div>
         <div class="container">
-            <iframe
-                style="border:0"
-                loading="lazy"
-                allowfullscreen
-                src="source">
-            </iframe>
+            <div class="container">
+                Add a Comment:
+                <input v-model="addNewComment" type="text" class="white">
+            </div>
         </div>
     </div>
 
