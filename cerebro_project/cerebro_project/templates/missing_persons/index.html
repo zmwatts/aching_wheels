@@ -29,16 +29,34 @@
         <br>
         <div class="center-align" id="mapsdiv" v-html="mapdiv"></div>
         <br>
-        <div class="container" v-for:comment in comments>
-            <div class="container">[[comment]]</div>
-        </div>
-        <div class="container">
-            <div class="container">
-                Add a Comment:
-                <input v-model="addNewComment" type="text" class="white">
-            </div>
-        </div>
     </div>
+        {% comment %}  {% endcomment %}
+    <div id="comments">
+        <div id="todo-list-example">
+        <form v-on:submit.prevent="addNewComment({{request.user}})">
+            <label for="new-comment">Add a comment</label>
+            <input
+            v-model="newCommentText"
+            id="new-comment"
+            placeholder="E.g. I found a clue"
+            >
+            <button>Add</button>
+        </form>
+
+        {% comment %} Comment List {% endcomment %}
+        <li class="container" 
+            {% comment %} is="comment"  {% endcomment %}
+            v-for:"(comment, index) in comments" 
+            v-bind:key="comment.id"
+            v-bind:text="comment.text"
+            v-on:remove="comments.splice(index, 1)">
+            <p class="container">
+                [[comment]] <br>
+                {% comment %} <button v-on:click="$emit(\'remove\')">Remove</button>\ {% endcomment %}
+            </p>
+        </li>
+    </div>
+    
 
 
     {% comment %} Axios CDN {% endcomment %}

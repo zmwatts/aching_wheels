@@ -1,8 +1,9 @@
-from apis.serializers import Missing_personSerializer
-from .models import Missing_person
+from apis.serializers import Missing_personSerializer, CommentSerializer
+from .models import Comment, Missing_person
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from rest_framework import filters, generics
+from rest_framework.response import Response
 
 # Create your views here.
 @login_required
@@ -25,3 +26,4 @@ class SearchResults(generics.ListAPIView):
     #         results = Missing_person.objects.filter(filter_backends = request.search_fields.pk, search_criteria=search_criteria)
     #         context = {'results':results}
     #     return render(request, 'search.html', context)
+

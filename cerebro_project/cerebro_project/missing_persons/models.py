@@ -38,6 +38,6 @@ class Missing_person(models.Model):
 class Comment(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     content = models.CharField(blank=False, max_length=200)
-    missing_person = models.ForeignKey(Missing_person,on_delete=models.CASCADE, blank=True, null=True)
+    missing_person = models.ForeignKey(Missing_person,on_delete=models.CASCADE, blank=True, null=True, related_name='comments')
     def __str__(self):
-        return self.username, self.id
+        return f'{self.username}, {self.missing_person}'
