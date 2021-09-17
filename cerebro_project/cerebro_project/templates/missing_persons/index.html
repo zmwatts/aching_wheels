@@ -8,7 +8,7 @@
         <h1 class="center-align">[[person.First_Name]] [[person.Last_Name]]</h1>
 
         <div>
-            <div class="column cyan accent-1 black-text">
+            <div v-if="person" class="column cyan accent-1 black-text">
                 <ul>
                     <li>Age:  [[person.Age]]</li>
                     <li>Date Last Contact: [[person.date_last_contact]]</li>
@@ -22,6 +22,7 @@
                 </ul>
             </div>
         </div>
+
         <div class="white black-text">
             <h5 class="center-align">Description of Disappearance</h3>
             [[person.description_of_disappearance]]
@@ -30,10 +31,15 @@
         <div class="center-align" id="mapsdiv" v-html="mapdiv"></div>
         <br>
     </div>
-        {% comment %}  {% endcomment %}
+
+
+{% comment %} ###########EVERYTHING ABOVE THIS WORKS######### {% endcomment %}
+    
+
+    {% comment %} COMMENT SECTION {% endcomment %}
     <div id="comments">
-        <div id="todo-list-example">
-        <form v-on:submit.prevent="addNewComment({{request.user}})">
+    {% comment %} Adding Comments {% endcomment %}
+        <form v-on:submit.prevent="addNewComment({{user.id}})">
             <label for="new-comment">Add a comment</label>
             <input
             v-model="newCommentText"
@@ -43,18 +49,27 @@
             <button>Add</button>
         </form>
 
-        {% comment %} Comment List {% endcomment %}
-        <li class="container" 
-            {% comment %} is="comment"  {% endcomment %}
-            v-for:"(comment, index) in comments" 
-            v-bind:key="comment.id"
-            v-bind:text="comment.text"
-            v-on:remove="comments.splice(index, 1)">
-            <p class="container">
-                [[comment]] <br>
-                {% comment %} <button v-on:click="$emit(\'remove\')">Remove</button>\ {% endcomment %}
-            </p>
-        </li>
+         <ul id="v-for-object">
+            <li class="container" 
+                v-for="(comment, index) in comments" 
+                v-bind:key="comment.id"
+                v-bind:text="comment.content"
+                v-bind:username="comment.username"> 
+                <p class="container">
+                    [[comment.username.username]] said: <br>[[comment.content]] at [[comment.date_published]]
+                    <span v-if="comment.username.id == {{user.id}}">
+                        <button v-on:click="deleteComment(index,comment.id)">Delete</button>
+                        <button v-on:click="editComment(index,comment.id)">Edit</button>
+                        <div style="display:none" :id="formcontainer(index)">
+                            <input v-model="comment.content" type="text"/><br>
+                            <button v-on:click="submitedit(index, comment.id)">Submit Edit</button>
+                        </div>
+                        <br>
+                    </span>
+                    <hr>
+                </p>
+            </li> 
+        </ul>
     </div>
     
 

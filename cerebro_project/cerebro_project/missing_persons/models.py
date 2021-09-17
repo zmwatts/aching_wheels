@@ -2,6 +2,8 @@
 from django.db import models
 from django.db.models.enums import TextChoices
 from django.contrib.auth.models import User
+import django.utils.timezone 
+from datetime import datetime
 
 class Eyecolor(models.Model):
     colors = (("GREEN", "GREEN"), ("BLUE", "BLUE"),("BLACK", "BLACK"), ("BROWN", "BROWN"), ("HAZEL", "HAZEL"), ("OTHER", "OTHER" ))
@@ -38,6 +40,8 @@ class Missing_person(models.Model):
 class Comment(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     content = models.CharField(blank=False, max_length=200)
+    date_published = models.DateTimeField(blank=False, default=django.utils.timezone.now)
+    date_editted = models.DateTimeField(blank=django.utils.timezone.now, default=django.utils.timezone.now)
     missing_person = models.ForeignKey(Missing_person,on_delete=models.CASCADE, blank=True, null=True, related_name='comments')
     def __str__(self):
         return f'{self.username}, {self.missing_person}'

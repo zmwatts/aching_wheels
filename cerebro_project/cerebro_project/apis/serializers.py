@@ -22,6 +22,8 @@ class CommentSerializer(serializers.ModelSerializer):
             'username',
             'content',
             'missing_person',
+            'date_published',
+            'date_editted'
         )
         # depth=1
 
@@ -29,7 +31,7 @@ class Missing_personSerializer(serializers.ModelSerializer):
     #race = serializers.SlugRelatedField(queryset=Race.objects.all,slug_field="id")
     # race = Race.objects.get(race=Missing_person.race)
     race = RaceSerializer()
-    comments = serializers.SlugRelatedField(many=True, slug_field="content", read_only=True)
+    # comments = serializers.SlugRelatedField(many=True, slug_field="content", read_only=True)
     class Meta:
         fields = (
             'id',
@@ -52,4 +54,4 @@ class Missing_personSerializer(serializers.ModelSerializer):
             'comments'
         )
         model = models.Missing_person
-        depth=1
+        depth=2
