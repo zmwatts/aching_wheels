@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="white black-text">
+        <div>
             <h5 class="center-align">Description of Disappearance</h3>
             [[person.description_of_disappearance]]
         </div>
@@ -33,20 +33,18 @@
     </div>
 
 
-{% comment %} ###########EVERYTHING ABOVE THIS WORKS######### {% endcomment %}
-    
-
     {% comment %} COMMENT SECTION {% endcomment %}
     <div id="comments">
     {% comment %} Adding Comments {% endcomment %}
-        <form v-on:submit.prevent="addNewComment({{user.id}})">
+        <form v-on:submit.prevent="addNewComment({{user.id}})" >
             <label for="new-comment">Add a comment</label>
             <input
             v-model="newCommentText"
             id="new-comment"
-            placeholder="E.g. I found a clue"
+            placeholder="E.g. I found a clue" 
+            v-on:keyup.enter="submit"
             >
-            <button>Add</button>
+            <button>Add Comment</button>
         </form>
 
          <ul id="v-for-object">
@@ -55,16 +53,22 @@
                 v-bind:key="comment.id"
                 v-bind:text="comment.content"
                 v-bind:username="comment.username"> 
-                <p class="container">
-                    [[comment.username.username]] said: <br>[[comment.content]] at [[comment.date_published]]
+                <p class="container" class="white black-text">
+                    [[comment.username.username]] said: <br>[[comment.content]] <br>
+                    <p class="right-align">
+                    [[comment.date_published]]
                     <span v-if="comment.username.id == {{user.id}}">
-                        <button v-on:click="deleteComment(index,comment.id)">Delete</button>
-                        <button v-on:click="editComment(index,comment.id)">Edit</button>
+                        <a v-on:click="deleteComment(index,comment.id)" class="btn-floating red right-align">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <a v-on:click="editComment(index,comment.id)" class="btn-floating orange">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </p>
                         <div style="display:none" :id="formcontainer(index)">
                             <input v-model="comment.content" type="text"/><br>
                             <button v-on:click="submitedit(index, comment.id)">Submit Edit</button>
                         </div>
-                        <br>
                     </span>
                     <hr>
                 </p>
