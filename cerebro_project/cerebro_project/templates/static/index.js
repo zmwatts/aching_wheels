@@ -23,18 +23,20 @@ let app = new Vue({
             console.log("anystring")
         })
         .then(()=>{
-        // let maps = document.getElementById("viewdiv")
             this.mapdiv =  `<iframe
-            width="700em"
+            width="550em"
             height="600em"
             frameborder="0" style="border:0"
             src="https://www.google.com/maps/embed/v1/view?key=${token}&center=${this.person.last_seen_latitude},${this.person.last_seen_longitude}&zoom=18&maptype=satellite" 
             allowfullscreen>
             </iframe>`
+            // <iframe 
+            // src="https://www.google.com/maps/d/embed?mid=12C7RhA4kv2E2ogjukUtLctLIwGRcxDHy" 
+            //width="550em" height="600em"></iframe>
         });
     },
 });
-////////////////////////////EVERYTHING ABOVE THIS WORKS/////////////////////
+
 let comment = new Vue({
     el: '#comments',
     delimiters: ["[[","]]"],
@@ -49,16 +51,12 @@ let comment = new Vue({
         let url = window.location.pathname;
         this.id = url.substring(url.lastIndexOf('/') + 1);
         axios.get(`http://127.0.0.1:8000/apis/v1/${this.id}/`).then((response)=>
-        // console.log(response)
         {
             this.comments = response.data.comments
         })
         },
     methods: {
     addNewComment: function (user) {
-        // this.comments.push({
-        //     content: this.newCommentText
-        // })
         axios.post(`http://127.0.0.1:8000/apis/v1/comment/`,
         {
             "username": user,
@@ -66,7 +64,6 @@ let comment = new Vue({
             "missing_person": this.id,
         }
         ).then(axios.get(`http://127.0.0.1:8000/apis/v1/${this.id}/`).then((response)=>
-        // console.log(response)
         {
         this.comments = response.data.comments
         this.newCommentText = ""})

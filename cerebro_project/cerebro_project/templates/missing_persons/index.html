@@ -53,8 +53,10 @@
                 v-bind:key="comment.id"
                 v-bind:text="comment.content"
                 v-bind:username="comment.username"> 
-                <p class="container" class="white black-text">
-                    [[comment.username.username]] said: <br>[[comment.content]] <br>
+                <p class="container">
+                    [[comment.username.username]] said: <br>
+                    <p>
+                    [[comment.content]]</p> 
                     <p class="right-align">
                     [[comment.date_published]]
                     <span v-if="comment.username.id == {{user.id}}">
